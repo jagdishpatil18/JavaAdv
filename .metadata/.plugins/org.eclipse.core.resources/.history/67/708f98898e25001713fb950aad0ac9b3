@@ -1,0 +1,8 @@
+
+public class Book 
+{
+
+	String name,auther;
+	double price;
+	int isbn;
+}

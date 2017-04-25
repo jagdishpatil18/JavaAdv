@@ -1,0 +1,20 @@
+package com.BridgeLabz.Programs;
+
+import java.util.Scanner;
+
+public class Parenttheses {
+
+	public static void main(String[] args) 
+	{
+		// TODO Auto-generated method stub
+
+		Scanner sc =new Scanner(System.in);
+		System.out.println("Enter the expression ");
+		String exp=sc.nextLine();
+		System.out.println("Expression is :"+exp);
+		
+	    int c;
+	    
+	}
+
+}

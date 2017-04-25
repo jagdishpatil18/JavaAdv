@@ -1,0 +1,13 @@
+package com.BridgeLabz.Programs;
+
+public class example 
+{
+
+	public static void main(String args[])
+	{		example emp1 = new example(23);
+			example emp2 = new example(23);
+			System.out.println("emp1.equals(emp2)--->>>"+emp1.equals(emp2));
+		}
+
+}
+

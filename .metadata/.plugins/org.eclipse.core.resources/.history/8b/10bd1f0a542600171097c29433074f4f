@@ -1,0 +1,15 @@
+package com.BridgeLabz.service;
+
+import java.io.FileNotFoundException;
+
+public interface AddressBook 
+{
+	void createAddressbook( );
+	void addperson( ) throws FileNotFoundException;
+	void showaddressbook( );
+	void deleteperson( );
+	void editdetails( );
+	void sortByName( );
+	void sortByZip( );
+	
+}

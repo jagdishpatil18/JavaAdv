@@ -1,0 +1,13 @@
+package com.BridgeLabz.Programs;
+
+public class example 
+{
+
+	public static void main(String args[])
+	{		hashcodeexp emp1 = new hashcodeexp(23);
+			hashcodeexp emp2 = new hashcodeexp(23);
+			System.out.println("emp1.equals(emp2)--->>>"+emp1.equals(emp2));
+		}
+
+}
+

@@ -1,0 +1,7 @@
+1492083441719	Delete element
+1492168426532	Rename resource 'service''
+1492168454561	Move 'Person.java' to 'model'
+1492168509876	Move 'AddressBookApp.java' to 'tester'
+1492168523861	Move 'AddressBookController.java' to 'controller'
+1492168540285	Move 'AddressBook.java' to 'service'
+1492168552421	Move 'AddressBookImp.java' to 'service'
