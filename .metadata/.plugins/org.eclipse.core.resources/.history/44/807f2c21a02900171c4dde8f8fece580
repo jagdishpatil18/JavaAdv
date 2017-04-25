@@ -1,0 +1,53 @@
+package service;
+
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Savepoint;
+import java.sql.Statement;
+import java.util.Scanner;
+
+import com.mysql.jdbc.Connection;
+
+public class jdbcsavepoint 
+{
+	Scanner scanner=new Scanner(System.in);
+	
+	
+	  String Driver="com.mysql.jdbc.Driver";
+	  String dburl="jdbc:mysql://localhost:3306/emp";
+	  String user="abc";
+	  String password="root";
+	 
+	 public static void main(String args[]) throws ClassNotFoundException, SQLException
+	 {
+		 Connection conection=null;
+		 Statement statement=null;
+		 Savepoint savepoint=null;
+		 Class.forName("com.mysql.jdbc.Driver");
+		 try 
+		 {
+			conection = (Connection) DriverManager.getConnection(dburl,user,password);
+			statement=conection.createStatement();
+			
+			conection.setAutoCommit(false);
+			statement.executeUpdate("insert into emp values (11,'JAck',23)");
+			conection.setSavepoint();
+			
+			statement.executeUpdate("delete from employee where id=3");
+			conection.commit();
+			
+				
+					
+		 } 
+		 catch (SQLException e)
+		 {
+			
+			 conection.rollback(savepoint);
+			 conection.commit();
+			 conection.close();
+			 
+			e.printStackTrace();
+		}
+		 
+	 }
+}

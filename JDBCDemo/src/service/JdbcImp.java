@@ -1,5 +1,6 @@
 package service;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,26 +15,35 @@ public class JdbcImp
 	
 	public static void main(String[] args) throws SQLException 
 	{
-	
+		  Scanner scanner=new Scanner(System.in);
+		  Connection connection=null;
+		
+		System.out.println("Getting connected");
 		try 
 		{
-			System.out.println("Getting connected");
 			Class.forName("com.mysql.jdbc.Driver");
-	
-			System.out.println("Connected");
-			Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
-			Statement statement=connection.createStatement();  
+	        System.out.println("Connected");
+	        connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
+			
 			System.out.println("Data is :");
-//			ResultSet rs=statement.executeQuery("select * from emp");
-//			while(rs.next())  
-//			System.out.println(rs.getInt(1)+"  "+rs.getString(2)+"  "+rs.getString(3));  
-//			ResultSet resultset=statement.executeQuery("select id,name from emp where name like'J%'  ");
-//			while(resultset.next())  
-//     		System.out.println(resultset.getInt(1)+"  "+resultset.getString(2)+"");  
+		    connection.setAutoCommit(false);
+		  
+		    
+		    System.out.println("Updating");	
+			PreparedStatement ps=(PreparedStatement) connection.prepareStatement("update employee set name=? where id=?");
+			System.out.println("Enter Id where you want to update");
+			int id1=scanner.nextInt();
+			System.out.println("Enter the new Name");
+			String name1=scanner.next();
+
+			ps.setString(1,name1);
+			ps.setInt(2, id1);
+			ps.executeUpdate();
 			
-			PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("insert into emp values(?,?,?)");
-			Scanner scanner=new Scanner(System.in);
+		    
+			PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("insert into employee values(?,?,?)");
 			
+			System.out.println("Insert data");
 			System.out.println("Enter Id");
 			int id=scanner.nextInt();
 			System.out.println("Enter the Name");
@@ -44,31 +54,12 @@ public class JdbcImp
 			preparedStatement.setString(2, name);
 			preparedStatement.setInt(3, age);
 			preparedStatement.executeUpdate();
-			
+			connection.commit();
 			
 			
 			String Name;
-			int Id,Age;
-			ResultSet resultSet=preparedStatement.executeQuery("Select * from emp");
-			while(resultSet.next())
-			{
-				Id=resultSet.getInt(1);
-				Name=resultSet.getString(2);
-				Age=resultSet.getInt(3);
-				System.out.println(Id+"  "+Name+"  "+Age);
-			}	
-			System.out.println("Updating");	
-			PreparedStatement ps=(PreparedStatement) connection.prepareStatement("update emp set name=? where id=?");
-			System.out.println("Enter Id where you want to update");
-			int id1=scanner.nextInt();
-			System.out.println("Enter the new Name");
-			String name1=scanner.next();
-
-			ps.setString(1,name1);
-			ps.setInt(2, id1);
-			ps.executeUpdate();
-			
-			ResultSet resultset=preparedStatement.executeQuery("Select * from emp");
+			int Id,Age;	
+			ResultSet resultset=preparedStatement.executeQuery("Select * from employee");
 			while(resultset.next())
 			{
 				Id=resultset.getInt(1);
@@ -77,13 +68,15 @@ public class JdbcImp
 				System.out.println(Id+"  "+Name+"  "+Age);
 			}	
 			
-			connection.close();  
+			 
 		}
-		catch (ClassNotFoundException e) {
-		
+		catch (ClassNotFoundException e)
+		{
+			connection.rollback();		
 			e.printStackTrace();
 		} catch (SQLException e) {
 			
+			connection.close(); 
 			e.printStackTrace();
 		}
 	}

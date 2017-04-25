@@ -1,0 +1,28 @@
+package service;
+
+import java.sql.*;
+import java.util.Scanner;
+
+import com.mysql.jdbc.Connection;
+
+public class jdbcsavepoint 
+{
+	 public static void main(String args[]) 
+	 {
+		 
+		 Scanner scanner=new Scanner(System.in);
+		 Connection conection=null;
+		 Statement statement=null;
+		 Savepoint savepoint=null;
+		 try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conection=DriverManager.getConnection("mysql:jdbc://localhost:3306?user=root&password=root");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 } 
+		
+	 }
+

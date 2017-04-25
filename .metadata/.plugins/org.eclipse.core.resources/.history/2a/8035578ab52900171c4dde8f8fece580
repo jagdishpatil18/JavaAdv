@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+</head>
+<body>
+<button type="button">Login</button>
+<button type="submit">Submit</button>
+</body>
+</html>

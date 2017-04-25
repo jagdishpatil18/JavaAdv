@@ -1,0 +1,106 @@
+package service;
+
+import java.net.CookieHandler;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Savepoint;
+import java.sql.Statement;
+import java.util.Scanner;
+
+import com.mysql.jdbc.PreparedStatement;
+
+public class JdbcImp
+{
+	
+	public static void main(String[] args) throws SQLException 
+	{
+		Connection connection=null;
+		Savepoint savepoint=null;
+		System.out.println("Getting connected");
+		
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+	        System.out.println("Connected");
+	        connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
+			Statement statement=connection.createStatement(); 
+		    
+		 
+			System.out.println("Data is :");
+			connection.setAutoCommit(false);
+		    Scanner scanner=new Scanner(System.in);
+		    
+//		    System.out.println("Updating");	
+//			PreparedStatement ps=(PreparedStatement) connection.prepareStatement("update employee set name=? where id=?");
+//			System.out.println("Enter Id where you want to update");
+//			int id1=scanner.nextInt();
+//			System.out.println("Enter the new Name");
+//			String name1=scanner.next();
+//
+//			ps.setString(1,name1);
+//			ps.setInt(2, id1);
+//			ps.executeUpdate();
+		    
+		    PreparedStatement ps=(PreparedStatement) connection.prepareStatement("insert into employee values(?,?,?)");
+		    System.out.println("Insert record ");
+			System.out.println("Enter Id");
+			int id=scanner.nextInt();
+			System.out.println("Enter the Name");
+			String name=scanner.next();
+			System.out.println("Enter age");
+			int age=scanner.nextInt();
+			ps.setInt(1, id);
+			ps.setString(2, name);
+			ps.setInt(3, age);
+			ps.executeUpdate();
+
+			savepoint=connection.setSavepoint();
+		    
+		    
+		    
+			PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("insert into emp values(?,?,?)");
+			
+			System.out.println("Insert record ");
+			System.out.println("Enter Id");
+			int id1=scanner.nextInt();
+			System.out.println("Enter the Name");
+			String name1=scanner.next();
+			System.out.println("Enter age");
+			int age1=scanner.nextInt();
+			preparedStatement.setInt(1, id1);
+			preparedStatement.setString(2, name1);
+			preparedStatement.setInt(3, age1);
+			preparedStatement.executeUpdate();
+			connection.commit();
+			
+			
+			String Name;
+			int Id,Age;
+
+			
+			ResultSet resultset=preparedStatement.executeQuery("Select * from employee");
+			while(resultset.next())
+			{
+				Id=resultset.getInt(1);
+				Name=resultset.getString(2);
+				Age=resultset.getInt(3);
+				System.out.println(Id+"  "+Name+"  "+Age);
+			}	
+			
+			 
+		}
+		catch (ClassNotFoundException e)
+		{
+			connection.rollback(savepoint);		
+			connection.commit();
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			connection.close(); 
+			e.printStackTrace();
+		}
+	}
+	
+}
