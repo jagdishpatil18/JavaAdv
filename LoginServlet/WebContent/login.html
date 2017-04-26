@@ -5,7 +5,16 @@
 <title>Login Page</title>
 </head>
 <body>
-<label><a href="signup.html">Login</a></label>
-<button type="submit">Submit</button>
+<form action="/loginservlet" method="post">
+<!-- <label><a href="signup.html">Login</a></label> -->
+
+<label><b>Email</b></label>
+<input type="text" placeholder="Enter Email" name="email"><br></br>
+<label><b>Password</b></label>
+<input type="password" placeholder="Enter Password" name="password"> <br>
+<label><a href="welcome.html">SignIn</a></label><br>
+
+<label><a href="signup.html">SignUp</a></label>
+</form>
 </body>
 </html>

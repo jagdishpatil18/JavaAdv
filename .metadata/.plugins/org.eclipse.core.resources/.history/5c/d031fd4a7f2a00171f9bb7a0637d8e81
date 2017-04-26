@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form >
+<label><b>Email</b></label>
+<input type="text" placeholder="Enter Email" name="email"><br></br>
+<label><b>Password</b></label>
+<input type="password" placeholder="Enter Password" name="password"> <br>
+</form>
+
+</body>
+</html>

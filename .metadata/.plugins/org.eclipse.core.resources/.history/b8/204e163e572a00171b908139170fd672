@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SignUp</title>
+</head>
+<body>
+<form action=""/loginServlet"" method="post">
+<h1>Welcome</h1>
+</form>
+</body>
+</html>
