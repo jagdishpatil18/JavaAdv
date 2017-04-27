@@ -1,0 +1,62 @@
+package com.bridgelabz.loginapp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.jdbc.PreparedStatement;
+
+
+//@WebServlet("/ServletLogin")
+public class ServletLogin extends HttpServlet 
+{
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		response.setContentType("text/html");
+		PrintWriter printWriter=response.getWriter();
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		printWriter.println("Welcome to signin");
+		String user=request.getParameter("username");
+		String passwd=request.getParameter("password");
+		printWriter.println(user+"  "+passwd);
+		
+		String ser=request.getServerName();
+		printWriter.println(ser);
+		
+		Connection connection=null;
+		
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Connecting");
+			
+			connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
+			System.out.println("connected");
+			PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("select emailid,password from users");
+			
+			ResultSet resultSet= preparedStatement.executeQuery("select * from users");
+			while(resultSet.next())
+			{
+				
+			}
+		} 
+		catch (ClassNotFoundException | SQLException e)
+		{
+			
+
+			e.printStackTrace();
+		}
+	}
+
+}

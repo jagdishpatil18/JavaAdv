@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index Page</title>
+</head>
+<style>
+input[type=text], input[type=password] {
+	width: 50%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.div {
+	border: 5px solid #b3ffff;
+	background-color: #b3ffff;
+	width: 450px;
+	height: 450px;
+	margin-left: 300px;
+	margin-top: 40px;
+	border-radius: 10px;
+}
+</style>
+
+<body bgcolor="#e6ffcc">
+	<center>
+		<div class="div">
+
+			<form action="ServletLogin" method="post">
+
+
+
+				<label><b>Username</b></label> <input type="text"
+					placeholder="Enter UserName" name="username"><br></br> <label><b>Password
+				</b></label><input type="password" placeholder="Enter Password" name="password">
+				<br> <br> <input type="submit" value="Login">
+			</form>
+
+			<br> <label> <a href="signup.html"><button>Signup</button></a></label>
+		</div>
+	</center>
+</body>
+</html>

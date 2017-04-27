@@ -1,0 +1,43 @@
+package com.bridgelabz.loginapp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+//@WebServlet("/SignupServlet")
+public class SignupServlet extends HttpServlet
+{
+	private static final long serialVersionUID = 1L;
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		response.setContentType("text/html");
+		PrintWriter printWriter=response.getWriter();
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		printWriter.println("Welcome to SignUp");
+		String email=request.getParameter("EmailId");
+		String fname=request.getParameter("firstname");
+		String lname=request.getParameter("lastname");
+		String mobile=request.getParameter("mobileno");
+		
+		printWriter.println(email+" "+fname+"  "+lname+"  "+mobile);
+		try 
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+		} 
+		catch (ClassNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*doGet(request, response);*/
+	}
+
+}
