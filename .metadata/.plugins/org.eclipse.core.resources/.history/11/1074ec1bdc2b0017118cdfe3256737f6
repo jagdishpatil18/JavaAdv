@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SignUp</title>
+<center>
+	<h2>Registration</h2>
+</center>
+</head>
+<style>
+table {
+	width: 50%;
+	border: 10px solid #e6ffff;
+	margin-left: 10px;
+}
+
+input[type=text], input[type=password] {
+	width: 70%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.container {
+	padding: 16px;
+}
+</style>
+
+<body bgcolor="#e6ffcc">
+	<form action="SignupServlet" method="post">
+		<div class="container" style="background-color: #e6ffcc">
+			<center>
+			<table >
+			 <tr>
+			   <td> Email </td>
+			   <td><input type="text" placeholder="Enter Email ID" name="EmailId"></td>
+			   </tr>
+			  <tr> 
+			   <td>First Name </td>
+			   <td><input type="text" placeholder="Enter your First name" name="firstname"></td>
+			  </tr>
+			<tr>
+			<td>Last Name</td>
+			<td> <input type="text" placeholder="Enter your last name" name="lastname"></td>
+			</tr>
+			<tr>
+			<td>Mobile No</td>
+			<td> <input type="text" placeholder="Enter your mobile number" name="mobileno""></td>
+			</tr>	
+			<tr>
+				<td>PassWord</td>
+				<td><input type="password" placeholder="Enter Password" name="password"></td>
+			</tr>	 
+			<tr><td><td><center><input type="submit" value="submit"></center></td></td></tr>
+		</table>	</center>
+		</div>
+	</form>
+</body>
+</html>

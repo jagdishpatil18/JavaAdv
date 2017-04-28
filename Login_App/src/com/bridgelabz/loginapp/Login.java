@@ -1,4 +1,4 @@
-/*package com.bridgelabz.loginapp;
+package com.bridgelabz.loginapp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,10 +9,9 @@ import java.sql.SQLException;
 
 public class Login 
 {
-
-	public static void main(String args[])
+	Connection connection=null;
+	public Login()
 	{
-		Connection connection=null;
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -20,8 +19,9 @@ public class Login
 
 			connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
 			System.out.println("connected");
-			PreparedStatement preparedStatement=connection.prepareStatement("insert into users values(?,?,?,?,?)");
+	//		PreparedStatement preparedStatement=connection.prepareStatement("insert into users values(?,?,?,?,?)");
 			
+	
 		}
 		catch (ClassNotFoundException | SQLException e) 
 		{
@@ -31,5 +31,8 @@ public class Login
 		
 		
 	}
+	public	Connection getconnect()
+	{
+		return connection; 
+	}
 }
-*/

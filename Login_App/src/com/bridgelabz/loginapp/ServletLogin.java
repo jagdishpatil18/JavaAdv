@@ -7,8 +7,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +28,7 @@ public class ServletLogin extends HttpServlet
 		response.setContentType("text/html");
 		PrintWriter printWriter=response.getWriter();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		printWriter.println("Welcome to signin");
+	//	printWriter.println("Welcome to signin");
 		String user=request.getParameter("username");
 		String passwd=request.getParameter("password");
 		printWriter.println(user+"  "+passwd);
@@ -34,47 +36,42 @@ public class ServletLogin extends HttpServlet
 		String ser=request.getServerName();
 		printWriter.println(ser);
 		
-		Connection connection=null;
+		Login connect=new Login();
+		Connection connection=connect.getconnect();
+
 		
 		try 
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Connecting");
-			
-			connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
-			System.out.println("connected");
-	     	PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("select emailid,password from users where emailid=? and password=?");
+	     	PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("select * from users where emailid=? and password=?");
 			preparedStatement.setString(1, user);
 			preparedStatement.setString(2, passwd);
+		
 			ResultSet resultSet= preparedStatement.executeQuery();
-	//		String usern,pw;
-			
+	
+			String fname,lname,emailid;
+			long mbno;
 			if(resultSet.next())
 			{
 				printWriter.println("Successfully logged in");
-				
+				/*Cookie cookie=new Cookie("name", user);
+				response.addCookie(cookie);*/
+				fname=resultSet.getString(3);
+				lname=resultSet.getString(4);
+				mbno=resultSet.getLong(5);
+
+				printWriter.println("EmailID:"+user);
+		    	printWriter.println("FirstName:"+fname);
+		    	printWriter.println("LastName:"+lname);
+		    	printWriter.println("Mobile Number:"+mbno);
+		
+		    	RequestDispatcher requestdispatcher=request.getRequestDispatcher("myaccount.html");
+				requestdispatcher.forward(request, response);
 			}
 			else
 			printWriter.println("Incorrect Login");
 			
-			/*while(resultSet.next())
-			{
-				if(user.equals(resultSet.getString(1)))
-				{
-				if(passwd.equals(resultSet.getString(2)))
-					printWriter.print("Successful login");
-				else
-					printWriter.println("Enter Correct Password");
-				
-				}
-				else
-				{
-					printWriter.println("Your are not registered user");
-				}	
-			}*/
-				
 		} 
-		catch (ClassNotFoundException | SQLException e)
+		catch (SQLException e)
 		{
 			
 

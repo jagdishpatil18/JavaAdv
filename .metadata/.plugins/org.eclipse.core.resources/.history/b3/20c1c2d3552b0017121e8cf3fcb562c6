@@ -1,0 +1,60 @@
+package com.BridgeLabz.Programs;
+
+public class Jsonmain 
+{
+
+	public static void main(String[] args) 
+	{
+
+		JSONParser parser=new JSONParser();
+		
+		try
+		{
+			Object object=parser.parse(new FileReader("/home/bridgeit/workspace/Java Programs/src/com/bridgelabz/programs/inventory.json"));
+			JSONObject jsonobject=(JSONObject) object;
+			//JSONArray inventory=(JSONArray) jsonobject.get("Inventory");
+			
+				
+				
+				JSONArray rice=(JSONArray) jsonobject.get("Rice");
+				
+				JSONArray pulses=(JSONArray) jsonobject.get("Pulses");
+				
+				JSONArray wheat=(JSONArray) jsonobject.get("Wheat");
+				
+				for(int j=0;j<rice.size();j++)
+				{
+					JSONObject jsonObject2=(JSONObject) rice.get(j);
+					System.out.println("\nName: "+jsonObject2.get("name"));
+					System.out.println("Weight: "+jsonObject2.get("weight"));
+					System.out.println("Name: "+jsonObject2.get("price/kg"));
+				
+				}
+		
+				for(int j=0;j<pulses.size();j++)
+				{
+					JSONObject jsonObject3=(JSONObject) pulses.get(j);
+					System.out.println("\nName: "+jsonObject3.get("name"));
+					System.out.println("Weight: "+jsonObject3.get("weight"));
+					System.out.println("Name: "+jsonObject3.get("price/kg"));
+				
+				}
+				
+				for(int j=0;j<wheat.size();j++)
+				{
+					JSONObject jsonObject4=(JSONObject) wheat.get(j);
+					System.out.println("\nName: "+jsonObject4.get("name"));
+					System.out.println("Weight: "+jsonObject4.get("weight"));
+					System.out.println("Name: "+jsonObject4.get("price/kg"));
+				
+				}
+			
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}

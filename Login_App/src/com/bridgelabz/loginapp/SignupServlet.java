@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,15 +31,12 @@ public class SignupServlet extends HttpServlet
 		String lname=request.getParameter("lastname");
 		String mobile=request.getParameter("mobileno");
 		String passwd=request.getParameter("password");
-		printWriter.println(email+" "+fname+"  "+lname+"  "+mobile+"   "+passwd);
-		Connection connection=null;
+//		printWriter.println(email+" "+fname+"  "+lname+"  "+mobile+"   "+passwd);
+		
+		Login connect=new Login();
+		Connection connection=connect.getconnect();
 		try 
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("Getting connected");
-
-			connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","root");
-			System.out.println("connected");
 			
 			PreparedStatement preparedStatement=connection.prepareStatement("insert into users values(?,?,?,?,?)");
 			preparedStatement.setString(1,email);
@@ -51,18 +49,16 @@ public class SignupServlet extends HttpServlet
 			
 			if(i>0)
 			{
-				printWriter.println("Successfully Registered");
+		//		printWriter.println("Successfully Registered");
+				RequestDispatcher requestdispatcher=request.getRequestDispatcher("index.html");
+				requestdispatcher.forward(request, response);
 			}
 		} 
-		catch (ClassNotFoundException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			printWriter.println("Enter valid Email id");
+			
+			printWriter.println(""+e);
 		}
 		/*doGet(request, response);*/
 	}

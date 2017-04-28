@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SignUp</title>
+<center>
+	<h2>Registration</h2>
+</center>
+</head>
+<style>
+table {
+	padding-left:10px;
+	border: 10px solid #e6ffff;
+	margin:10px;
+}
+
+input[type=text], input[type=password],input[type=email] {
+	width: 80%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+.container {
+	padding: 16px;
+}
+</style>
+
+<body bgcolor="#e6ffcc">
+	<form action="SignupServlet" method="post">
+		<div class="container" style="background-color: #e6ffcc">
+			<center>
+			<table >
+			 <tr>
+			   <td><b> Email</b> </td>
+			   <td><input type="email" placeholder="Enter Email ID" name="EmailId" required></td>
+			   </tr>
+			  <tr> 
+			   <td><b>First Name </b></td>
+			   <td><input type="text" placeholder="Enter your First name" name="firstname" required></td>
+			  </tr>
+			<tr>
+			<td><b>Last Name</b></td>
+			<td> <input type="text" placeholder="Enter your last name" name="lastname" required></td>
+			</tr>
+			<tr>
+			<td><b>Mobile No</b></td>
+			<td> <input type="tel" pattern="^\d{4}-\d{3}-\d{4}$" placeholder="Enter your mobile number)" name="mobileno" required></td>
+			</tr>	
+			<tr>
+				<td><b>PassWord</b></td>
+				<td><input type="password" placeholder="Enter Password" name="password" required></td>
+			</tr>	 
+			<tr><td><td><input type="submit" value="submit" >
+				<input type="Reset"  value="reset"></td></td>
+			</tr>
+		</table>	
+		</center>
+		</div>
+	</form>
+</body>
+</html>

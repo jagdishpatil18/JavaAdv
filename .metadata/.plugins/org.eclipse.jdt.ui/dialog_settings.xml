@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="/home/abc/Downloads/jars" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="/home/abc/Downloads" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="DialogBounds_SuperInterfaceSelectionDialog">
 		<item value="412" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
