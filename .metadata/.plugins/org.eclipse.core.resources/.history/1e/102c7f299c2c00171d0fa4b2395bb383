@@ -1,0 +1,77 @@
+package com.bridgelabz.loginapp;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.mysql.jdbc.PreparedStatement;
+
+
+//@WebServlet("/DisplayServlet")
+public class DisplayServlet extends HttpServlet 
+{
+	private static final long serialVersionUID = 1L;
+       
+   
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		response.setContentType("text/html");
+		PrintWriter printWriter=response.getWriter();
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		Login connect=new Login();
+		Connection connection=connect.getconnect();
+
+		try 
+		{
+			PreparedStatement preparedStatement=(PreparedStatement) connection.prepareStatement("select * from users");
+			ResultSet resultSet= preparedStatement.executeQuery();
+			
+			String fname,lname,emailid;
+			long mbno;
+			while(resultSet.next())
+			{
+		//		printWriter.println("Successfully logged in");
+				
+				emailid=resultSet.getString(1);
+				fname=resultSet.getString(3);
+				lname=resultSet.getString(4);
+				mbno=resultSet.getLong(5);
+
+				printWriter.println("<HTML>");
+				printWriter.println("<head>");
+		//		printWriter.println("Welcome to Display");
+				printWriter.println("</head>");
+				printWriter.println("<body >");
+				printWriter.println("<Details are ><br>");
+				printWriter.println("<table>");
+				printWriter.println("<tr><td>EmailID:</td><td>emailid</td</tr>");
+		    	printWriter.println("<tr><td>FirstName:</td><td>fname</td></tr>");
+		    	printWriter.println("<br>LastName:"+lname);
+		    	printWriter.println("<br>Mobile Number:"+mbno);
+		    	printWriter.println("</body>");
+		    	printWriter.println("</HTML>");
+		    	
+			}
+		
+		}
+		catch (SQLException e)
+		{
+		
+			e.printStackTrace();
+		}
+		
+		
+
+	}
+
+}

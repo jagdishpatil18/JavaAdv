@@ -13,14 +13,20 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/ServletLogin</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  <servlet-name>Signup</servlet-name>
-  <servlet-class>com.bridgelabz.loginapp.SignupServlet</servlet-class>
-  
+    <servlet-name>Signup</servlet-name>
+    <servlet-class>com.bridgelabz.loginapp.SignupServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name>Signup</servlet-name>
-  <url-pattern>/SignupServlet</url-pattern>
+    <servlet-name>Signup</servlet-name>
+    <url-pattern>/SignupServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Display</servlet-name>
+    <servlet-class>com.bridgelabz.loginapp.DisplayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Display</servlet-name>
+    <url-pattern>/DisplayServlet</url-pattern>
   </servlet-mapping>
 </web-app>

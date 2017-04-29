@@ -31,8 +31,7 @@ public class ServletLogin extends HttpServlet
 	//	printWriter.println("Welcome to signin");
 		String user=request.getParameter("username");
 		String passwd=request.getParameter("password");
-		printWriter.println(user+"  "+passwd);
-		
+			
 		String ser=request.getServerName();
 		printWriter.println(ser);
 		
@@ -48,25 +47,16 @@ public class ServletLogin extends HttpServlet
 		
 			ResultSet resultSet= preparedStatement.executeQuery();
 	
-			String fname,lname,emailid;
-			long mbno;
 			if(resultSet.next())
 			{
 				printWriter.println("Successfully logged in");
 				/*Cookie cookie=new Cookie("name", user);
 				response.addCookie(cookie);*/
-				fname=resultSet.getString(3);
-				lname=resultSet.getString(4);
-				mbno=resultSet.getLong(5);
 
-				printWriter.println("EmailID:"+user);
-		    	printWriter.println("FirstName:"+fname);
-		    	printWriter.println("LastName:"+lname);
-		    	printWriter.println("Mobile Number:"+mbno);
-		
-		    	RequestDispatcher requestdispatcher=request.getRequestDispatcher("myaccount.html");
+				RequestDispatcher requestdispatcher=request.getRequestDispatcher("UpdateServlet");
 				requestdispatcher.forward(request, response);
 			}
+			
 			else
 			printWriter.println("Incorrect Login");
 			
