@@ -29,4 +29,14 @@
     <servlet-name>Display</servlet-name>
     <url-pattern>/DisplayServlet</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>Update</servlet-name>
+    <servlet-class>com.bridgelabz.loginapp.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update</servlet-name>
+    <url-pattern>/UpdateServlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>

@@ -51,11 +51,20 @@ public class UpdateServlet extends HttpServlet {
 				printWriter.println("<tr><td>Update Lastname:</td><td><input type=text name=ulname></td></tr>");
 				printWriter.println("<tr><td>Update MobileNo:</td><td><input type=text name=umbno></td></tr>");
 		    	printWriter.println("<center></table");
+		    	
 
 				printWriter.println("</body>");
 		    	printWriter.println("</HTML>");
 				
 			}
+		/*	PreparedStatement preparedStatement1=(PreparedStatement) connection.prepareStatement("insert into users values(?,?,?,?)");
+			
+			preparedStatement.setString(2, );
+			preparedStatement.setString(3, fname);
+			preparedStatement.setString(4, lname);
+			preparedStatement.setString(5, mobile);*/
+			
+	//		int i=preparedStatement.executeUpdate();
 		
 		}
 		catch (SQLException e)

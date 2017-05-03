@@ -1,25 +1,21 @@
-package com.bridgelabz.loginapp;
+package com.bridgelab.loginjsp;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-
-
-public class Login 
+public class DBConnection
 {
 	Connection connection=null;
-	public Login()
+	public DBConnection()
 	{
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Getting connected");
 
-			connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/bridgeit","root","bridgeit");
+			connection =DriverManager.getConnection("jdbc:mysql://localhost:3306/LoginJSP","root","bridgeit");
 			System.out.println("connected");
-	//		PreparedStatement preparedStatement=connection.prepareStatement("insert into users values(?,?,?,?,?)");
 			
 	
 		}
@@ -31,8 +27,9 @@ public class Login
 		
 		
 	}
-	public	Connection getconnect()
+	public	Connection getconnection()
 	{
 		return connection; 
 	}
+	
 }
