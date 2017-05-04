@@ -41,12 +41,14 @@ public class LoginServlet extends HttpServlet {
 			{
 				printWriter.println("Login Successful");
 				System.out.println("Successful login ");
-				RequestDispatcher requestdispatcher=request.getRequestDispatcher("EmployeeRegistration.jsp");
+			/*	RequestDispatcher requestdispatcher=request.getRequestDispatcher("EmployeeRegistration.jsp");
 				requestdispatcher.include(request, response);
+*/	
+				response.sendRedirect("EmployeeRegistration.jsp");
 			}
-			/*else 
+			else 
 				printWriter.println("Invalid Login");
-				System.out.println("Invalid Login");*/
+			//	System.out.println("Invalid Login");
 		} 
 		catch (SQLException e) 
 		{

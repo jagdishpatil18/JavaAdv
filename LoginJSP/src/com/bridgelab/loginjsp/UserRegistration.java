@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,6 +48,10 @@ public class UserRegistration extends HttpServlet {
 			if(resultSet>0)
 			{
 				printWriter.println("Successfully Registered");
+		//		RequestDispatcher requestdispatcher=request.getRequestDispatcher("Login.jsp");
+		//		requestdispatcher.include(request, response);
+			
+				response.sendRedirect("Login.jsp");
 			}
 			else
 				printWriter.println("Error Occured");

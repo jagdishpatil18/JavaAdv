@@ -64,6 +64,8 @@ public class EmployeeReg extends HttpServlet
 			if(i>0)
 			{
 				printWriter.println("Employee Details added successfully");
+				
+				response.sendRedirect("EmployeeRegistration.jsp");
 			}
 			else
 				printWriter.println("Error Occured");
