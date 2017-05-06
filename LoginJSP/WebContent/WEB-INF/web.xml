@@ -2,45 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>LoginJSP</display-name>
   <welcome-file-list>
-    <welcome-file>Login.jsp</welcome-file>
-    <welcome-file>UserRegistration.jsp</welcome-file>
-    <welcome-file>EmployeeRegistration.jsp</welcome-file>
+    <welcome-file>Prelogin</welcome-file>
   </welcome-file-list>
-  
-  <servlet>
-    <servlet-name>Login</servlet-name>
-    <servlet-class>com.bridgelab.loginjsp.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Login</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>UserRegistration</servlet-name>
-    <servlet-class>com.bridgelab.loginjsp.UserRegistration</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserRegistration</servlet-name>
-    <url-pattern>/UserRegistration</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>EmployeeRegistration</servlet-name>
-    <servlet-class>com.bridgelab.loginjsp.EmployeeReg</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>EmployeeRegistration</servlet-name>
-    <url-pattern>/EmployeeReg</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-  <servlet-name>EmployeeDetails</servlet-name>
-  <servlet-class>com.bridgelab.loginjsp.EmployeeDetails</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  <servlet-name>EmployeeDetails</servlet-name>
-  <url-pattern>/EmployeeDetails</url-pattern>
-  </servlet-mapping>
-  
 </web-app>

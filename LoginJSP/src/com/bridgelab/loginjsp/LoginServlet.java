@@ -13,9 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
-//@WebServlet("/LoginServlet")
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        	
@@ -31,6 +32,21 @@ public class LoginServlet extends HttpServlet {
 		DBConnection connect=new DBConnection();
 		Connection connection=connect.getconnection();
 	
+		/*	HttpSession session=request.getSession();
+		Integer accesscount;
+		synchronized (session) 
+		{
+			accesscount= (Integer) session.getAttribute("accesscount");
+			if(accesscount==null)
+			{
+				accesscount=0;
+			}
+			else{
+				accesscount=new Integer(accesscount+1);
+			}
+			session.setAttribute("accesscount", accesscount);
+		}*/
+		
 		try 
 		{
 			PreparedStatement preparedStatement=connection.prepareStatement("select * from UserDetails where emailid=? and password=?");
@@ -41,14 +57,24 @@ public class LoginServlet extends HttpServlet {
 			{
 				printWriter.println("Login Successful");
 				System.out.println("Successful login ");
+				HttpSession session=request.getSession();
+				int uid=resultSet.getInt(5);
+				session.setAttribute("userid", uid);
+				String uemail=resultSet.getString(1);
+		//		printWriter.println("     Session Id is : "+session.getId());
+		//		printWriter.println("     LAst accessTime: "+session.getLastAccessedTime());
 			/*	RequestDispatcher requestdispatcher=request.getRequestDispatcher("EmployeeRegistration.jsp");
 				requestdispatcher.include(request, response);
 */	
 				response.sendRedirect("EmployeeRegistration.jsp");
 			}
-			else 
+			else {
 				printWriter.println("Invalid Login");
 			//	System.out.println("Invalid Login");
+			//	RequestDispatcher requestdispatcher=request.getRequestDispatcher("Login.jsp");
+			//	requestdispatcher.include(request, response);
+
+			}
 		} 
 		catch (SQLException e) 
 		{

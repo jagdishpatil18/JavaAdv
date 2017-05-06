@@ -5,7 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Registration</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+		crossorigin="anonymous">
 </head>
 
 <script>
@@ -34,7 +36,7 @@ table {
 	background-color: #e6ffe6;
 }
 td,th{
-    padding: 8px;
+    padding: 6px;
 }
 input[type=text],input[type=number]{
 	width: 350px;
@@ -61,9 +63,19 @@ input[type=radio],input[type=checkbox]
  body{
 background-color: #f2f2f2; 
 } 
+
+.logout{
+float:right;
+padding:10px;
+}
 </style>
 <body >
-<a href="EmployeeDetails">EmployeeDetails</a>
+<a href="EmployeeDetails">EmployeeDetails</a><br>
+<!-- <a href ="Login.jsp" >LogOut</a> -->
+
+<form action="Logout" method="post"  class="logout">
+<input type="submit" value="Logout" class="btn btn-primary btn-lg"> 
+</form>
 <form action="EmployeeReg" method="post">
 		<div class="container1" >
 			<center>
@@ -77,7 +89,8 @@ background-color: #f2f2f2;
 			  </tr>
 			<tr>
 			<td><b>Address </b></td>
-			<td> <textarea  rows="4"  placeholder="Enter Address" name="address" required style="width: 350px; padding-left: 20px; padding-top: 12px; background-color: #ffffcc "  ></textarea>
+			<td> <textarea  rows="4"  placeholder="Enter Address" name="address" required style="width: 350px; 
+					padding-left: 20px; padding-top: 12px; background-color: #ffffcc "  ></textarea>
 			</td></tr>
 			<tr>
 			<td><b>Company Name </b></td>
@@ -87,6 +100,10 @@ background-color: #f2f2f2;
 				<td><b>Age</b></td>
 				<td><input type="number" placeholder="Enter Age" name="age" required></td>
 			</tr>	
+			<tr>
+				<td><b>Salary</b></td>
+				<td><input type="number" placeholder="Enter Salary" name="salary" required></td>
+			</tr>
 			<tr>
 			<td><b>Gender</b></td>
 			<td><input type="radio" name="gender" value="male" >Male&nbsp &nbsp
@@ -109,7 +126,8 @@ background-color: #f2f2f2;
 			<input type="checkbox" name="language" value="Marathi"> Marathi &nbsp &nbsp
 			</td> 
 			</tr>
-			<tr><td><td><input type="submit" value="Submit" style="width: 200px; " class="btn btn-success btn-lg" onclick="return validateemp()">
+			<tr><td><td><input type="submit" value="Submit" style="width: 200px; " class="btn btn-success btn-lg" 
+								onclick="return validateemp()">
 				<input type="Reset"  value="Reset" style="width: 200px; " class="btn btn-primary btn-lg"></td></td>
 			</tr>
 		</table>	
