@@ -19,7 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	doGet(req, resp);
+    }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
@@ -32,7 +35,7 @@ public class UserRegistration extends HttpServlet {
 			printWriter.println(" Email missing");
 		}	
 		String passwd=request.getParameter("password");
-		if(passwd==null)
+		if(passwd==null || passwd.trim().length()==0 )
 		{
 			printWriter.println(" password missing");
 		}
@@ -60,22 +63,27 @@ public class UserRegistration extends HttpServlet {
 			
 			int i=preparedStatement.executeUpdate();
 			 System.out.println(i);
-			if(i>0)
+			if(i==1)
 			{
 				printWriter.println("Successfully Registered");
-		//		RequestDispatcher requestdispatcher=request.getRequestDispatcher("Login.jsp");
-		//		requestdispatcher.include(request, response);
+			//	response.sendRedirect("Login.jsp");
+			//	RequestDispatcher requestdispatcher=request.getRequestDispatcher("Prelogin");
+			//	requestdispatcher.forward(request, response);
 			
-				response.sendRedirect("Login.jsp");
+		//		response.sendRedirect("Login.jsp");
+		//		request.getRequestDispatcher("Prelogin").include(request, response);
+				response.sendRedirect("Prelogin");
 			}
-			else
+			/*else
 				printWriter.println("Error Occured/ allready registered");
-			    RequestDispatcher requestdispatcher=request.getRequestDispatcher("UserRegistration.jsp");
+			    RequestDispatcher requestdispatcher=request.getRequestDispatcher("Preuserreg");
 			    requestdispatcher.include(request, response);
-		} 
+*/		} 
 		catch (SQLException e)
 		{
-			
+			printWriter.println("Error Occured/ allready registered");
+		    RequestDispatcher requestdispatcher=request.getRequestDispatcher("Preuserreg");
+		    requestdispatcher.include(request, response);
 			e.printStackTrace();
 		}
 	}

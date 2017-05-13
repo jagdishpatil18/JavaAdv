@@ -20,6 +20,10 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        	
+	/*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		doPost(request, response);
+	}*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
@@ -46,9 +50,18 @@ public class LoginServlet extends HttpServlet {
 			}
 			session.setAttribute("accesscount", accesscount);
 		}*/
-		
-		try 
+		/*HttpSession session1=request.getSession();
+		Integer sessionid=(Integer) session1.getAttribute("userid");
+	
+		if(sessionid!=null)
 		{
+			response.sendRedirect("Employee");
+			return;
+		}
+		else
+		{	  */      
+		 try 
+		 {
 			PreparedStatement preparedStatement=connection.prepareStatement("select * from UserDetails where emailid=? and password=?");
 			preparedStatement.setString(1, user);
 			preparedStatement.setString(2, passwd);
@@ -57,30 +70,36 @@ public class LoginServlet extends HttpServlet {
 			{
 				printWriter.println("Login Successful");
 				System.out.println("Successful login ");
+				
 				HttpSession session=request.getSession();
 				int uid=resultSet.getInt(5);
 				session.setAttribute("userid", uid);
 				String uemail=resultSet.getString(1);
+		
 		//		printWriter.println("     Session Id is : "+session.getId());
 		//		printWriter.println("     LAst accessTime: "+session.getLastAccessedTime());
 			/*	RequestDispatcher requestdispatcher=request.getRequestDispatcher("EmployeeRegistration.jsp");
 				requestdispatcher.include(request, response);
 */	
-				response.sendRedirect("EmployeeRegistration.jsp");
+		//		response.sendRedirect("EmployeeRegistration.jsp");
+				response.sendRedirect("Employee");
 			}
-			else {
+		 
+			 else 
+			 {
 				printWriter.println("Invalid Login");
 			//	System.out.println("Invalid Login");
-			//	RequestDispatcher requestdispatcher=request.getRequestDispatcher("Login.jsp");
-			//	requestdispatcher.include(request, response);
-
-			}
-		} 
-		catch (SQLException e) 
-		{
+		//		RequestDispatcher requestdispatcher=request.getRequestDispatcher("Prelogin");
+		//		requestdispatcher.include(request, response);
+		    	response.sendRedirect("Prelogin");
+			 }
+		  } 
+		  catch (SQLException e) 
+		  {
 			
-			e.printStackTrace();
+			   e.printStackTrace();
+		  }
 		}
-	}
+//	}
 
 }

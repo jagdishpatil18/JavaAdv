@@ -27,78 +27,74 @@ public class EmployeeDetails extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		response.setContentType("text/html");
-		PrintWriter printWriter=response.getWriter();
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		
 		DBConnection connect=new DBConnection();
 		Connection connection=connect.getconnection();
-		request.getRequestDispatcher("Logout.jsp").include(request,response );
+		request.getRequestDispatcher("Header.jsp").include(request, response);
 		
-		String uri=request.getRequestURI();
-		String path=request.getPathInfo();
-		String protocol=request.getProtocol();
-		String raddress=request.getRemoteAddr();
-		
-			printWriter.println("<br>    URI : "+uri);
-			printWriter.println(" <br>   Path : "+path);
-			printWriter.println(" <br>   Protocol : "+protocol);
-			printWriter.println(" <br>   Remote Address : ");
-			
-			HttpSession session=request.getSession();
+		HttpSession session=request.getSession();
 			Integer user=(Integer) session.getAttribute("userid");
 			if(user!=null)
 			{
-						
-			printWriter.println("<br> Session created on :"+session.getCreationTime());
-			printWriter.println("<br> LastAccessedTime : "+session.getLastAccessedTime());
-			printWriter.println("<br> Session Id :"+session.getId());
-			printWriter.println("<br> Session Inactive Time :"+session.getMaxInactiveInterval());
-		try
-		{
-			PreparedStatement preparedStatement=connection.prepareStatement("Select * from EmployeeDetails where UId=?");
-			preparedStatement.setInt(1, user);
-			ResultSet resultSet= preparedStatement.executeQuery();
+				request.getRequestDispatcher("EmployeeInfo.jsp").forward(request, response);
 			
-			printWriter.println("<HTML>");
-			printWriter.println("<body>");
-			
-			printWriter.println("<table border=2px solid black>");
-			printWriter.println("<br>");
-			printWriter.println("<tr><td>Sr No</td><td>Name</td><td> Address</td> <td>Company</td><td> Age</td><td> Gender</td> <td>Specialization</td><td> Languages Know</td><td>Salary</td></tr>");
-			printWriter.println("<br>");
+		/*		try
+				{
+					PreparedStatement preparedStatement=connection.prepareStatement("Select * from EmployeeDetails where UId=?");
+					preparedStatement.setInt(1, user);
+					ResultSet resultSet= preparedStatement.executeQuery();
+					
+					
+					printWriter.println("<br>");
+					printWriter.println("<html>");
+					printWriter.println("<head>");
+			//		printWriter.println("<style >");
+					printWriter.println("<link href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css' rel='stylesheet' type='text/css'/>");
+					printWriter.println("<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js'></script>");
+					printWriter.println("<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>");
+					
+					printWriter.println("<script type='text/javascript'>$(document).ready(function () {");
+		             
+					printWriter.println("$('.eli').click(function () {");
+					printWriter.println("var myid=$(this).attr('id')");
+					printWriter.println("console.log(myid,'hellllo')");
+		  //....          printWriter.println("$('#dialog').dialog({modal: true, height: 400, width: 400 });");
+		          
+					printWriter.println("$('<div ><div >Hello<div></div>').dialog({modal: true, height: 400, width: 400 });");
+		            printWriter.println(";});});");
+		            printWriter.println(" </script>");
+		            printWriter.println("<style>");
+		       //     printWriter.println("#dialog{ font-size:14px; text-align: center; }");
+		            printWriter.println("</style>");
+                    printWriter.println("</head>");
+                    printWriter.println("<body>");
+                	printWriter.println("<ul class='eul'><li class='ecli'><b>Employee Names</b></li>");
+                    while(resultSet.next())
+					{
+					printWriter.println("<li class='eli' id='"+resultSet.getInt(10)+"'>"+resultSet.getString(1)+"</li>");	
+			//		String email=resultSet.getString(2);
+		//			printWriter.println("<div id='dialog' title='EmployeeInfo'>"+resultSet.getString(1)+"</div>" );
+					}
+					
+					printWriter.println("</ul>");
+		//....			printWriter.println("<div id='dialog' title='EmployeeInfo'></div>" );		
+					printWriter.println("</body></html>");
+				  } 
+					
+				  catch (SQLException e) 
+				  {
+					  e.printStackTrace();
+				  }
 
-			int i=1;
-			while(resultSet.next())
-			{
-				String name=resultSet.getString(1);
-				String address=resultSet.getString(2);
-				String company=resultSet.getString(3);
-				String age=resultSet.getString(4);
-				String gender=resultSet.getString(5);
-				String special=resultSet.getString(6);
-				String lang=resultSet.getString(7);
-				String salary=resultSet.getString(9);				
-				printWriter.println("<tr><td>"+i+"</td><td>"+name+"</td> <td> "+address+"</td> <td>"+company+"</td><td>"+age+"</td> <td>"+gender+"</td><td> "+special+"</td> <td>"+lang+"</td><td>"+salary+"</td></tr>");
-				
-			i++;
-				
-			}
-			printWriter.println("</table>");
-			printWriter.println("</body>");
-			printWriter.println("</HTML>");
-		} 
-			
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-		}
-		}
-			
-			else
-			{
-				response.sendRedirect("Login.jsp");
-
-			}
+	//.......			request.getRequestDispatcher("EmployeeDetails").forward(request, response);
+		//......		response.sendRedirect("EmployeeInfo.jsp");
+*/			}
+					
+			  else
+			  {
+				  response.sendRedirect("Prelogin");
+			  }
 	}
 
 	
