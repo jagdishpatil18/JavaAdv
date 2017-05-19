@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">  
+  
+ <hibernate-mapping>  
+  <class name="com.bridgeit.DTO.Contact" table="Contact">  
+    <id name="id" column="ID">  
+     <generator class="assigned"></generator>  
+    </id>  
+            
+    <property name="name" column="Name"></property>  
+    <property name="email" column="EmailId"></property>  
+    <property name="address" column="Address"></property>        
+    <property name="telephone" column="Telephone"></property>
+  </class>  
+</hibernate-mapping> 
