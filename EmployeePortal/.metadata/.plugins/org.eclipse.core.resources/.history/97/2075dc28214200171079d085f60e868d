@@ -1,0 +1,294 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" 
+    import="java.util.*,java.sql.*, com.bridgelab.employeeportal.DBConnection"
+%>
+
+<%
+	 DBConnection connect=new DBConnection();
+	 Connection connection=connect.getconnection();
+//	 request.getRequestDispatcher("Header.jsp").include(request, response);
+
+	 session=request.getSession();
+	 Integer user=(Integer) session.getAttribute("userid");
+	 String empid=(String)session.getAttribute("eid");
+	 if(user!=null)
+	 {
+    	try
+		{
+			PreparedStatement preparedStatement=connection.prepareStatement("Select * from EmployeeDetails where empid=?");
+			preparedStatement.setString(1, empid);
+			ResultSet rs= preparedStatement.executeQuery();
+
+ %>
+<%@ include file = "header.jsp" %>
+<!-- <li class="hlid"><a href="EmployeeDetails" style="padding-left: 30px">EmployeeDetails</a><br></li>
+	</ul>
+</div> -->
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
+<%
+
+	while(rs.next())
+	{	
+%>
+<%-- 
+<form action="Update_Emp" method="post" style="padding-top: 50px" >
+		
+			<center>
+			<table class="tableemp" cellpadding="20">
+			 <tr>
+			 <td><td><h3> Update Employee </h3></td></td>
+			 </tr>
+			  <tr> 
+			   <td><b>Employee Name </b></td>
+			   <td><input type="text" id="ename" placeholder="Enter  name" name="name" value="<%=rs.getString(1)%>" required></td>
+			  </tr>
+			<tr>
+			<td><b>Address </b></td>
+			<td> <textarea  rows="3" id="eadd" placeholder="Enter Address" name="address"  required style="width: 350px; 
+					padding-left: 20px; padding-top: 12px; background-color: #ffffcc "  ><%=rs.getString(2)%></textarea>
+			</td></tr>
+			<tr>
+			<td><b>Company Name </b></td>
+			<td> <input type="text" id="cname" placeholder="Enter company name" name="company" value="<%=rs.getString(3)%>" required ></td>
+			</tr>
+			<tr>
+				<td><b>Age</b></td>
+				<td><input type="number" id="num"placeholder="Enter Age" name="age" value=<%=rs.getInt(4)%> required></td>
+			</tr>	
+			<tr>
+				<td><b>Salary</b><br>
+				(in lacs per annum)
+				</td>
+				<td><input type="number" id="num1"placeholder="Enter Salary" name="salary" value="<%=rs.getString(9)%>"required></td>
+			</tr>
+			<tr>
+			<td><b>Gender</b></td>
+			<%if(rs.getString(5).equals("male")) {%>
+			<td><input type="radio" name="gender" value="male" checked>Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female">Female
+			</td> 
+			<%} else{ %>
+			<td><input type="radio" name="gender" value="male" >Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female" checked>Female
+			</td>
+			<%} %>
+			</tr>
+			<tr>
+			<td><b>Specialization</b></td>
+			<td><input type="text" id="specializeU" placeholder="Enter specialization" name="special" value="<%=rs.getString(6)%>" required ></td>
+			</tr>
+			
+			<tr>
+			<td><b>Languages Known</b></td>
+			<td><input type="text" id="languageU" placeholder="Enter Languages " name="lang" value="<%=rs.getString(7)%>" required >	</td> 
+			</tr>
+			<tr><td><td><input type="submit" value="UpdateMe" style="width: 100px; " class="btn btn-success btn-lg" 
+								onclick="return validateemp()">
+						<button formaction="EmployeeDetails" class="btn btn-primary btn-lg">Cancle	</button>	
+	<!-- 			<input type="Reset"  value="Reset" style="width: 150px; " class="btn btn-primary btn-lg"></td></td> -->
+			</tr>
+		</table>	
+		</center>
+		
+	</form>
+
+ --%>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>EmployeePortal</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+function validateemp()
+{
+
+	var fullname=document.getElementById('ename').value;
+	var name = /^[a-zA-Z  ]+$/;
+	
+ 	if(fullname.length==null ||!name.test(fullname))
+ 	{
+ 		alert("Enter Name which contains only alphabets ");
+ 		return false;
+ 		
+ 	}
+ 	if($('#eadd').val()==null || $('#eadd').val()=="")
+  	{
+		 alert("Please Enter Address");
+		 return false;
+     }	
+ 	
+ 	if($('#cname').val()==null || $('#cname').val()=="")
+  	{
+		 alert("Please Enter Company name");
+		 return false;
+     }	
+ 	
+ 	var eage=document.getElementById('num').value;
+ 	
+ 	if($('#num').val()>100 || $('#num').val()<1)
+ 	{
+ 		alert("Enter valid age");
+ 		return false;
+ 		
+ 	}	
+ 	var esall=document.getElementById('num1').value;
+ 	if($('#num1').val()>1000 || $('#num1').val()<0)
+ 	{
+ 		alert("Enter valid salary (0-1000)");
+ 		return false;
+ 		
+ 	}
+ 	
+ 	var spec=document.getElementById('"specializeU"').value;
+ 	if(spec.length==null ||!name.test(spec))
+ 	{
+ 		alert("Enter specialization ");
+ 		return false;
+ 		
+ 	}
+
+ 	var laung=document.empupdtn.language;
+ 	for(var i=0;i<laung.length;i++)
+ 	{
+ 		if(laung[i].checked)
+ 			break;
+ 		else 
+ 		alert("Please select Language");
+ 		return false;
+ 	}	
+ 	
+}
+
+</script>
+<style type="text/css">
+
+.container{
+margin-top: 150px;
+
+}
+ #empup{
+border: 2px solid black;
+
+background-color: #f0f5f5;
+padding-bottom: 40px;
+padding-top: 10px;
+padding-left: 20px;
+padding-right: 20px;
+}
+} 
+
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+<div class="container">
+<div class="row">
+<div class="col-lg-4 col-md-3">
+</div>
+<div class="col-lg-4 col-md-6 col-sm-12" id="empup">
+<h2>  Update EmployeeDetails </h2>
+  <form action="Update_Emp"method="post" onsubmit="return validateemp()"  name="empupdtn">
+		
+  
+    <div class="form-group">
+      <label  >Employee Name</label>
+      <input type="text" id="ename" placeholder="Enter  name" name="name" value="<%=rs.getString(1)%>" required>
+    </div>
+    
+    <div class="form-group">
+      <label id="addid" >Address</label>
+       <textarea  rows="3" id="eadd"  placeholder="Enter Address" name="address" required   style="margin-left:50px"><%=rs.getString(2)%></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label  >Company Name</label>
+     <input type="text" id="cname" placeholder="Enter company name" name="company" value="<%=rs.getString(3)%>" required >
+    </div>
+     <div class="form-group">
+      <label >Age</label>
+      <input type="number" id="num"placeholder="Enter Age" name="age"   value=<%=rs.getInt(4)%> style="margin-left:80px" required>
+    </div>
+    <div class="form-group">
+      <label >Salary</label>
+      <input type="number" id="num1"placeholder="Enter Salary" name="salary" required style="margin-left:65px" value="<%=rs.getString(9)%>">
+    </div>
+    <div class="form-group">
+      <label >Gender</label>
+      <%if(rs.getString(5).equals("male")) {%>
+      <input type="radio" name="gender" value="male"  checked style="margin-left:50px">Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female">Female
+		<%} else{ %>
+		<input type="radio" name="gender" value="male" style="margin-left:50px">Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female"  checked>Female	
+				<%} %>	
+    </div>
+    
+    <div class="form-group">
+      <label  >Specialization</label>
+     <input type="text" id="specializeU" placeholder="Enter specialization" name="special" value="<%=rs.getString(6)%>" style="margin-left:30px"  required >
+    </div>
+    <div class="form-group">
+      <label >Languages Known</label>
+      <input type="text" id="languageU" placeholder="Enter Languages " name="lang" value="<%=rs.getString(7)%>" required >
+    </div>
+    
+    
+    
+    
+    
+    
+    
+   <div class="form-group">
+    <input type="submit" value="Update"  class="btn btn-success btn-block" 
+								onclick="return validateemp()">
+	
+	</div>
+	<div class="form-group">
+	<button formaction="EmployeeDetails" class="btn btn-primary btn-block">Cancel	</button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="col-lg-4 col-md-3 col-sm-2">
+</div>
+</div>
+
+
+
+
+</body>
+</html>
+<%    }
+	}	
+	catch (SQLException e) 
+			  {
+				  e.printStackTrace();
+			  }
+		  }
+				
+		  else
+		  {
+			  response.sendRedirect("Prelogin");
+		  }
+
+
+		  %>

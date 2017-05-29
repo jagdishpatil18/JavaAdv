@@ -1,0 +1,190 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" 
+    import="java.util.*,java.sql.*, com.bridgelab.employeeportal.DBConnection"
+%>
+
+<%
+	 DBConnection connect=new DBConnection();
+	 Connection connection=connect.getconnection();
+//	 request.getRequestDispatcher("Header.jsp").include(request, response);
+
+	 session=request.getSession();
+	 Integer user=(Integer) session.getAttribute("userid");
+	 String empid=(String)session.getAttribute("eid");
+	 if(user!=null)
+	 {
+    	try
+		{
+			PreparedStatement preparedStatement=connection.prepareStatement("Select * from EmployeeDetails where empid=?");
+			preparedStatement.setString(1, empid);
+			ResultSet rs= preparedStatement.executeQuery();
+
+ %>
+<%@ include file = "header.jsp" %>
+<!-- <li class="hlid"><a href="EmployeeDetails" style="padding-left: 30px">EmployeeDetails</a><br></li>
+	</ul>
+</div> -->
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
+<%
+
+	while(rs.next())
+	{	
+%>
+<%-- 
+<form action="Update_Emp" method="post" style="padding-top: 50px" >
+		
+			<center>
+			<table class="tableemp" cellpadding="20">
+			 <tr>
+			 <td><td><h3> Update Employee </h3></td></td>
+			 </tr>
+			  <tr> 
+			   <td><b>Employee Name </b></td>
+			   <td><input type="text" id="ename" placeholder="Enter  name" name="name" value="<%=rs.getString(1)%>" required></td>
+			  </tr>
+			<tr>
+			<td><b>Address </b></td>
+			<td> <textarea  rows="3" id="eadd" placeholder="Enter Address" name="address"  required style="width: 350px; 
+					padding-left: 20px; padding-top: 12px; background-color: #ffffcc "  ><%=rs.getString(2)%></textarea>
+			</td></tr>
+			<tr>
+			<td><b>Company Name </b></td>
+			<td> <input type="text" id="cname" placeholder="Enter company name" name="company" value="<%=rs.getString(3)%>" required ></td>
+			</tr>
+			<tr>
+				<td><b>Age</b></td>
+				<td><input type="number" id="num"placeholder="Enter Age" name="age" value=<%=rs.getInt(4)%> required></td>
+			</tr>	
+			<tr>
+				<td><b>Salary</b><br>
+				(in lacs per annum)
+				</td>
+				<td><input type="number" id="num1"placeholder="Enter Salary" name="salary" value="<%=rs.getString(9)%>"required></td>
+			</tr>
+			<tr>
+			<td><b>Gender</b></td>
+			<%if(rs.getString(5).equals("male")) {%>
+			<td><input type="radio" name="gender" value="male" checked>Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female">Female
+			</td> 
+			<%} else{ %>
+			<td><input type="radio" name="gender" value="male" >Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female" checked>Female
+			</td>
+			<%} %>
+			</tr>
+			<tr>
+			<td><b>Specialization</b></td>
+			<td><input type="text" id="specializeU" placeholder="Enter specialization" name="special" value="<%=rs.getString(6)%>" required ></td>
+			</tr>
+			
+			<tr>
+			<td><b>Languages Known</b></td>
+			<td><input type="text" id="languageU" placeholder="Enter Languages " name="lang" value="<%=rs.getString(7)%>" required >	</td> 
+			</tr>
+			<tr><td><td><input type="submit" value="UpdateMe" style="width: 100px; " class="btn btn-success btn-lg" 
+								onclick="return validateemp()">
+						<button formaction="EmployeeDetails" class="btn btn-primary btn-lg">Cancle	</button>	
+	<!-- 			<input type="Reset"  value="Reset" style="width: 150px; " class="btn btn-primary btn-lg"></td></td> -->
+			</tr>
+		</table>	
+		</center>
+		
+	</form>
+
+ --%>
+<html>
+<body>
+
+<div class="container">
+<div class="row">
+<div class="col-lg-4 col-md-3">
+</div>
+<div class="col-lg-4 col-md-6 col-sm-12" id="empre">
+<h2>  Update EmployeeDetails </h2>
+  <form action="EmployeeForm"method="post" onsubmit="return validateemp()" class="empreg">
+		
+  
+    <div class="form-group">
+      <label  >Employee Name</label>
+      <input type="text" id="ename" placeholder="Enter  name" name="name" value="<%=rs.getString(1)%>" required>
+    </div>
+    
+    <div class="form-group">
+      <label id="addid" >Address</label>
+       <textarea  rows="3" id="eadd"  placeholder="Enter Address" name="address" required   style="margin-left:50px"><%=rs.getString(2)%></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label  >Company Name</label>
+     <input type="text" id="cname" placeholder="Enter company name" name="company" value="<%=rs.getString(3)%>" required >
+    </div>
+     <div class="form-group">
+      <label >Age</label>
+      <input type="number" id="num"placeholder="Enter Age" name="age"   value=<%=rs.getInt(4)%> style="margin-left:80px" required>
+    </div>
+    <div class="form-group">
+      <label >Salary</label>
+      <input type="number" id="num1"placeholder="Enter Salary" name="salary" required style="margin-left:65px" value="<%=rs.getString(9)%>">
+    </div>
+    <div class="form-group">
+      <label >Gender</label>
+      <%if(rs.getString(5).equals("male")) {%>
+      <input type="radio" name="gender" value="male"  checked style="margin-left:50px">Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female">Female
+		<%} else{ %>
+		<input type="radio" name="gender" value="male" >Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female" style="margin-left:50px" checked>Female	
+				<%} %>	
+    </div>
+    
+    <div class="form-group">
+      <label >Specialization</label>
+     <input type="text" id="specializeU" placeholder="Enter specialization" name="special" value="<%=rs.getString(6)%>" required >
+    </div>
+    <div class="form-group">
+      <label >Languages Known</label>
+      <input type="text" id="languageU" placeholder="Enter Languages " name="lang" value="<%=rs.getString(7)%>" required >
+    </div>
+    
+    
+    
+    
+    
+    
+    
+   <div class="form-group">
+    <input type="submit" value="Update"  class="btn btn-success btn-block" 
+								onclick="return validateemp()">
+	
+	</div>
+	<div class="form-group">
+	<button formaction="EmployeeDetails" class="btn btn-primary btn-block">Cancle	</button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="col-lg-4 col-md-3 col-sm-2">
+</div>
+</div>
+
+
+
+
+</body>
+</html>
+<%    }
+	}	
+	catch (SQLException e) 
+			  {
+				  e.printStackTrace();
+			  }
+		  }
+				
+		  else
+		  {
+			  response.sendRedirect("Prelogin");
+		  }
+
+
+		  %>

@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%@ include file="header.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+function validateuser()
+{
+
+    var email = document.getElementById('emailid1');
+     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z]{2,3})+$/; 
+    /* var filter=/^\w\.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; */
+    var password=document.getElementById('password1');
+	var pass=password.value;
+	
+	var firstname=document.getElementById('fname');
+	var first=firstname.value;
+	var name = /^[a-zA-Z]+$/;
+	
+	var lastname=document.getElementById('lname');
+	var last=lastname.value;
+	
+	
+    if(!filter.test(email.value))
+    {
+    	alert("Enter valid Email");
+    	return false;
+    }
+	
+ 	if(first.length==null ||!name.test(first))
+ 	{
+ 		alert("Enter Firstname which contains only alphabets ");
+ 		return false;
+ 		
+ 	}
+ 	
+ 	if(last.length==null || !name.test(last))
+ 	{
+ 		alert("Enter Lastname which contains only alphabets");
+ 		return false;
+ 		
+ 	}
+ 	
+ 	if(pass=="" || pass==null )
+  	{
+		 alert("Password never blank");
+		 return false;
+	}
+ 	
+}
+ 
+  
+
+</script>
+</head>
+<style>
+
+</style>
+<body>
+
+<form action="UserRegistration" method="post" class="user"> 
+<!-- <form action="Preuserreg" method="post"> -->
+	<!--  	<div class="container" >  -->
+
+			<table  class="usertbl">
+			 <tr>
+			 <td><td><h3>&nbsp   SignUp Page</h3></td></td>
+			 </tr>
+			 <tr>
+			   <td><b> Email</b> </td>
+			   <td><input type="email" id="emailid1" placeholder="Enter Email ID" name="EmailId" required></td>
+			   </tr>
+			  <tr> 
+			   <td><b>First Name </b></td>
+			   <td><input type="text" id="fname" placeholder="Enter your First name" name="firstname" required></td>
+			  </tr>
+			<tr>
+			<td><b>Last Name</b></td>
+			<td> <input type="text" id="lname" placeholder="Enter your last name" name="lastname" required></td>
+			</tr>
+				
+			<tr>
+				<td><b>PassWord</b></td>
+				<td><input type="password" id="password1" placeholder="Enter Password" name="password" required></td>
+			</tr>	 
+			<tr><td><td><input type="submit" value="Submit" onclick="return validateuser()" class="btn btn-success btn-lg">
+				<input type="reset"  value="Reset" class="btn btn-primary btn-lg"></td></td>
+			</tr>
+			<tr><td></td><td>Already Registered ?<a href="Prelogin">Login</a></td>
+			</tr>
+		</table>	
+		
+ <!--  		</div>  -->
+	</form>
+
+</body>
+</html>

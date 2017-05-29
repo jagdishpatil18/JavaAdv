@@ -1,0 +1,65 @@
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/Delete_Emp")
+public class Delete_Emp extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+/*	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+*/	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+	
+		response.setContentType("text/html");
+		PrintWriter printWriter=response.getWriter();
+		HttpSession session=request.getSession();
+		Integer user=(Integer) session.getAttribute("userid");
+	    String empid1=request.getParameter("myid");
+	    session.setAttribute("empid1", empid1);
+	    
+	    if(empid1!=null)
+		{
+			    DBConnection connect=new DBConnection();
+				Connection connection=connect.getconnection();
+		
+				try 
+				{
+					PreparedStatement preparedStatement=connection.prepareStatement("Delete from  EmployeeDetails where empid=?");
+					preparedStatement.setString(1, empid1);
+					int rs=preparedStatement.executeUpdate();
+					
+					if(rs==1)
+					{
+					//	request.getRequestDispatcher("EmployeeDetails").forward(request, response);
+						response.sendRedirect("EmployeeDetails");
+					}
+					connection.close();
+				}
+				catch (SQLException e) 
+				{
+					
+					e.printStackTrace();
+				}
+		}		
+	    else
+	    {
+	    	response.sendRedirect("EmployeeDetails");
+	    }
+	}
+
+}

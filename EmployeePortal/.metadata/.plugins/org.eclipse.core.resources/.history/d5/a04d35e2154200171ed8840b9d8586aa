@@ -1,0 +1,288 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+ <%@ include file = "header.jsp" %> 
+<%--  <% if(session.getAttribute("userid")!=null) { %>
+<li class="hlid"><a href="EmployeeDetails" style="padding-left: 30px">EmployeeDetails</a><br></li>
+<%} %>
+</ul>
+</div>  --%>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>EmployeePortal</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+function validateemp()
+{
+
+	var fullname=document.getElementById('ename').value;
+	var name = /^[a-zA-Z  ]+$/;
+	
+ 	if(fullname.length==null ||!name.test(fullname))
+ 	{
+ 		alert("Enter Name which contains only alphabets ");
+ 		return false;
+ 		
+ 	}
+ 	if($('#eadd').val()==null || $('#eadd').val()=="")
+  	{
+		 alert("Please Enter Address");
+		 return false;
+     }	
+ 	
+ 	if($('#cname').val()==null || $('#cname').val()=="")
+  	{
+		 alert("Please Enter Company name");
+		 return false;
+     }	
+ 	
+ 	var eage=document.getElementById('num').value;
+ 	
+ 	if($('#num').val()>100 || $('#num').val()<1)
+ 	{
+ 		alert("Enter valid age");
+ 		return false;
+ 		
+ 	}	
+ 	var esall=document.getElementById('num1').value;
+ 	if($('#num1').val()>1000 || $('#num1').val()<0)
+ 	{
+ 		alert("Enter valid salary (0-1000)");
+ 		return false;
+ 		
+ 	}
+ 	
+ 	var spec=document.empregstn.specialization;
+ 	for(var i=0;i<spec.length;i++)
+ 	{
+ 		if(spec[i].checked)
+ 			break;
+ 		else 
+ 		alert("Please select Specialization");
+ 		return false;
+ 	}	
+
+ 	var laung=document.empregstn.language;
+ 	for(var i=0;i<laung.length;i++)
+ 	{
+ 		if(laung[i].checked)
+ 			break;
+ 		else 
+ 		alert("Please select Language");
+ 		return false;
+ 	}	
+ 	
+}
+
+</script>
+<style type="text/css">
+
+.container{
+margin-top: 150px;
+
+}
+/* #empre{
+border: 2px solid black;
+} */
+.empreg{
+border: 2px solid black;
+background-color: #f0f5f5;
+padding-bottom: 40px;
+padding-top: 10px;
+padding-left: 20px;
+padding-right: 20px;
+}
+
+
+</style>
+</head>
+<!-- ................................................
+<body>
+<%-- <nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" >Employee Portal</a>
+		</div>
+	<!-- 	<div class="collapse navbar-collapse"> -->
+		<ul class="nav navbar-nav">
+			<%if(session.getAttribute("userid")!=null) {%>
+			<li><a href="EmployeeDetails">EmployeeDetails</a></li>
+			<%} %>
+			
+			
+			
+		</ul>
+
+		<ul class="nav navbar-nav navbar-right">
+			
+			
+			<%if(session.getAttribute("userid")!=null){%>
+			<li ><form action="Logout" method="post"  class="logout">
+            <input id="hlogout" type="submit" value="Logout" class="btn btn-primary"> 			
+            <% }%>
+		</ul>
+	<!-- 	</div> -->
+	</div>
+	</nav> --%>
+
+
+<div class="container" 	>
+<div class="row">
+<div class="col-lg-4 col-md-3 col-sm-2"></div>
+
+<div class="col-lg-4 col-md-6 col-sm-8">
+<form action="EmployeeForm"method="post" onsubmit="return validateemp()" class="empreg">
+		<h2> Employee Registration</h2>
+			
+			<table >
+			  <tr> 
+			   <td><b>Employee Name </b></td>
+			   <td><input type="text" id="ename" placeholder="Enter  name" name="name" required></td>
+			  </tr>
+			<tr>
+			<td><b>Address </b></td>
+			<td> <textarea  rows="3" id="eadd"  placeholder="Enter Address" name="address" required  ></textarea>
+			</td></tr>
+			<tr>
+			<td><b>Company Name </b></td>
+			<td> <input type="text" id="cname" placeholder="Enter company name" name="company" required ></td>
+			</tr>
+			<tr>
+				<td><b>Age</b></td>
+				<td><input type="number" id="num"placeholder="Enter Age" name="age" required></td>
+			</tr>	
+			<tr>
+				<td><b>Salary</b><br>(in lacs per annum)</td>
+				<td><input type="number" id="num1"placeholder="Enter Salary" name="salary" required></td>
+			</tr>
+			<tr>
+			<td><b>Gender</b></td>
+			<td><input type="radio" name="gender" value="male"  checked>Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female">Female
+			</td> 
+			</tr>
+			<tr >
+			<td><b>Specialization </b></td>
+			<td ><input type="checkbox" id="spe" value="java" name="specialization">Java &nbsp &nbsp
+			<input type="checkbox" id="spe"  value=".net" name="specialization"> .Net &nbsp &nbsp
+			<input type="checkbox" id="spe"  value="ios" name="specialization"> iOS&nbsp &nbsp
+			<input type="checkbox" id="spe"  value="android" name="specialization"> Android &nbsp &nbsp
+			</td>
+			</tr>
+			
+			<tr>
+			<td><b>Languages Known</b></td>
+			<td><input type="checkbox" name="language" value="English" >English &nbsp &nbsp
+			<input type="checkbox" name="language" value="Hindi"> Hindi &nbsp &nbsp
+			<input type="checkbox" name="language" value="Marathi"> Marathi &nbsp &nbsp
+			</td> 
+			</tr>
+			<tr><td><td><input type="submit" value="Submit"  class="btn btn-success btn-lg" >
+								
+				<input type="Reset"  value="Reset"  class="btn btn-primary btn-lg"></td></td>
+			</tr>
+		</table>	
+	
+		
+	</form>
+</div> 
+
+<div class="col-lg-4 col-md-3 col-sm-2"></div>
+
+</div>
+</div>
+</body>
+</html>
+
+........................
+ -->
+
+<body>
+<div class="container">
+<div class="row">
+<div class="col-lg-4 col-md-3">
+</div>
+<div class="col-lg-4 col-md-6 col-sm-12" id="empre">
+
+  <form action="EmployeeForm"method="post" onsubmit="return validateemp()" class="empreg">
+		
+  <h2> Employee Registration</h2>
+    <div class="form-group">
+      <label  >Employee Name</label>
+      <input type="text" id="ename" placeholder="Enter  name" name="name" required>
+    </div>
+    
+    <div class="form-group">
+      <label id="addid" >Address</label>
+       <textarea  rows="3" id="eadd"  placeholder="Enter Address" name="address" required   style="margin-left:50px"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label  >Company Name</label>
+     <input type="text" id="cname" placeholder="Enter company name" name="company" required >
+    </div>
+     <div class="form-group">
+      <label >Age</label>
+      <input type="number" id="num"placeholder="Enter Age" name="age" required style="margin-left:80px">
+    </div>
+    <div class="form-group">
+      <label >Salary</label>
+      <input type="number" id="num1"placeholder="Enter Salary" name="salary" required style="margin-left:65px">
+    </div>
+    <div class="form-group">
+      <label >Gender</label>
+      <input type="radio" name="gender" value="male"  checked style="margin-left:50px">Male &nbsp &nbsp
+				<input type="radio" name="gender" value="female">Female
+    </div>
+    
+    <div class="form-group">
+      <label >Specialization</label>
+     <input type="checkbox" id="spe" value="java" name="specialization">Java &nbsp &nbsp
+			<input type="checkbox" id="spe"  value=".net" name="specialization"> .Net &nbsp &nbsp
+			<input type="checkbox" id="spe"  value="ios" name="specialization"> iOS&nbsp &nbsp
+			<input type="checkbox" id="spe"  value="android" name="specialization"> Android &nbsp &nbsp
+    </div>
+    <div class="form-group">
+      <label >Languages</label>
+      <input type="checkbox" name="language" value="English" >English &nbsp &nbsp
+			<input type="checkbox" name="language" value="Hindi"> Hindi &nbsp &nbsp
+			<input type="checkbox" name="language" value="Marathi"> Marathi &nbsp &nbsp
+    </div>
+    
+    
+    
+    
+    
+    
+    
+   <div class="form-group">
+    <input type="submit" value="Submit"  class="btn btn-success btn-block" >
+	
+	</div>
+	<div class="form-group">
+	<input type="Reset"  value="Reset"  class="btn btn-primary btn-block">
+    </div>
+  </form>
+</div>
+</div>
+<div class="col-lg-4 col-md-3 col-sm-2">
+</div>
+</div>
+</body>
+</html>
+
