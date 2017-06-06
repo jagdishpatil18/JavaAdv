@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="HelpherClass" class="com.bridgeit.didemo.SpringDi.HelpherClass">
+		<constructor-arg>
+			<ref bean="DemoImplement" />
+		</constructor-arg>
+	</bean>
+	
+
+	<bean id="DemoImplement" class="com.bridgeit.didemo.SpringDi.DemoImplement" />
+
+</beans>
